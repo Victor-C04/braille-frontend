@@ -19,9 +19,14 @@ function App() {
   const inputRef = useRef(null);
 
   const updateSuggestions = (word) => {
-   axios.post(`${process.env.REACT_APP_API_URL}/suggest`, { input: word })
-    .then(res => setSuggestions(res.data.suggestions));
+    axios.post(`${process.env.REACT_APP_API_URL}/suggest`, { input: word })
+    .then(res => setSuggestions(res.data.suggestions))
+    .catch(err => {
+      console.error("Suggestion fetch failed:", err.message);
+      setSuggestions([]);
+    });
   };
+
 
 
   useEffect(() => {
