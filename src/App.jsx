@@ -18,16 +18,15 @@ function App() {
   const [dotsSequence, setDotsSequence] = useState([]);
   const inputRef = useRef(null);
 
-  const updateSuggestions = (word) => {
-    axios.post(`${process.env.REACT_APP_API_URL}/suggest`, { input: word })
+const updateSuggestions = (word) => {
+  const apiUrl = import.meta.env.VITE_API_URL;
+  axios.post(`${apiUrl}/suggest`, { input: word })
     .then(res => setSuggestions(res.data.suggestions))
     .catch(err => {
       console.error("Suggestion fetch failed:", err.message);
       setSuggestions([]);
     });
-  };
-
-
+};
 
   useEffect(() => {
     const handleKeyDown = (e) => {
