@@ -19,9 +19,10 @@ function App() {
   const inputRef = useRef(null);
 
   const updateSuggestions = (word) => {
-    axios.post('http://localhost:5000/suggest', { input: word })
-      .then(res => setSuggestions(res.data.suggestions));
+   axios.post(`${process.env.REACT_APP_API_URL}/suggest`, { input: word })
+    .then(res => setSuggestions(res.data.suggestions));
   };
+
 
   useEffect(() => {
     const handleKeyDown = (e) => {
